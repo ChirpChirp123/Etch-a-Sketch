@@ -9,7 +9,10 @@ const body = document.querySelector('body');
 
     const gridButton = document.createElement('button');
     gridButton.textContent = "beeboo";
+    gridButton.style.cssText = "font-size: 48px;"
     gridButton.addEventListener('click', () => {
+        //We want the numbers to be changed with a variable.
+        //"16" is just a testing value.
         for(let i = 0; i <= 16; i++){
         createDiv(16, 16);
         }
@@ -17,12 +20,27 @@ const body = document.querySelector('body');
         once:true
     });
 
-    const gridContainer = document.createElement('div');
-    gridContainer.style.cssText = "display:flex; justify-content: center; padding: 1em;";
+    const clearGrid = document.createElement('button');
+    clearGrid.textContent = "Clear";
+    clearGrid.style.cssText = "font-size: 48px";
+    clearGrid.addEventListener('click', () =>{
+        clear();
+    })
 
-container.appendChild(gridContainer);
+    //Our drawing grid
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'gridContainer'
+
+    const drawingGrid = document.createElement('div');
+    drawingGrid.className = 'drawingGrid'
+
 body.appendChild(gridButton);
-body.appendChild(container);
+body.appendChild(clearGrid);
+body.appendChild(container);    
+container.appendChild(gridContainer);
+gridContainer.appendChild(drawingGrid);
+
+
 
 
 
@@ -42,16 +60,27 @@ function createDiv(gridLength, gridWidth) {
 
     for (let i = 0; i < x; i++){    //Length
         var row = document.createElement('div');
-        row.className = 'row';                       //Needed for CSS
+        row.className = 'row';                       //(.className) = Needed for CSS
         for (let j = 1; j <= y; j++){   //Width
             var cell = document.createElement('div');
             cell.className = 'cell';
             row.appendChild(cell);
         }
     }
+    let gridCells = document.querySelectorAll('.cell')
+    gridCells.forEach(cell => cell.addEventListener('mouseover', () =>{
+        cell.style.cssText = "background-color: blue;"
+    }))
     gridContainer.appendChild(row);
 }
 
+//"Clearing" out the cells by selecting all cells created
+//and changing its background color back to its default.
+
+function clear(){
+    let clear = document.querySelectorAll('.cell');
+    clear.forEach(cell => cell.style.cssText = "background-color: navajowhite;");
+}
 
 
 
