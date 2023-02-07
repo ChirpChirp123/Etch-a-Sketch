@@ -13,7 +13,7 @@ const body = document.querySelector('body');
     gridButton.addEventListener('click', () => {
         //We want the numbers to be changed with a variable.
         //"16" is just a testing value.
-        for(let i = 0; i <= 16; i++){
+        for(let i = 0; i <= 16; i++){ 
         createDiv(16, 16);
         }
     }, {
@@ -58,20 +58,21 @@ function createDiv(gridLength, gridWidth) {
     let x = gridLength;
     let y = gridWidth;
 
-    for (let i = 0; i < x; i++){    //Length
+    for (let i = 0; i <= x; i++){    //Length
         var row = document.createElement('div');
         row.className = 'row';                       //(.className) = Needed for CSS
-        for (let j = 1; j <= y; j++){   //Width
+        for (let j = 0; j <= y; j++){   //Width
             var cell = document.createElement('div');
             cell.className = 'cell';
             row.appendChild(cell);
         }
     }
+    drawingGrid.appendChild(row);
+
     let gridCells = document.querySelectorAll('.cell')
     gridCells.forEach(cell => cell.addEventListener('mouseover', () =>{
         cell.style.cssText = "background-color: blue;"
-    }))
-    gridContainer.appendChild(row);
+    }));
 }
 
 //"Clearing" out the cells by selecting all cells created
