@@ -20,6 +20,13 @@ const body = document.querySelector('body');
         once:true
     });
 
+    const promptButton = document.createElement('button');
+    promptButton.style.cssText = "font-size: 48px;"
+    promptButton.textContent = "Adjust";
+    promptButton.addEventListener('click', () => {
+        promptAdjust();
+    })
+
     const clearGrid = document.createElement('button');
     clearGrid.textContent = "Clear";
     clearGrid.style.cssText = "font-size: 48px";
@@ -27,7 +34,7 @@ const body = document.querySelector('body');
         clear();
     })
 
-    //Our drawing grid
+    //Our drawing containers
     const gridContainer = document.createElement('div');
     gridContainer.className = 'gridContainer'
 
@@ -35,6 +42,7 @@ const body = document.querySelector('body');
     drawingGrid.className = 'drawingGrid'
 
 body.appendChild(gridButton);
+body.appendChild(promptButton);
 body.appendChild(clearGrid);
 body.appendChild(container);    
 container.appendChild(gridContainer);
@@ -69,6 +77,8 @@ function createDiv(gridLength, gridWidth) {
     }
     drawingGrid.appendChild(row);
 
+    //Careful of Hierachy, if above (appendchild) then one row is missing.
+    
     let gridCells = document.querySelectorAll('.cell')
     gridCells.forEach(cell => cell.addEventListener('mouseover', () =>{
         cell.style.cssText = "background-color: blue;"
@@ -83,8 +93,23 @@ function clear(){
     clear.forEach(cell => cell.style.cssText = "background-color: navajowhite;");
 }
 
+function promptAdjust(){
+    let gridVolume = prompt("How many squares per side?", "");
+    if (gridVolume > 100) {
+        return error();
+    } else if ((gridVolume <= 100) && (gridVolume > 0)){
+        createDiv(gridVolume, gridVolume);
+    } else if (gridVolume < 0){
+        return error();  
+    } else {
+        return;
+    }
+}
 
-
+function error(){
+    alert ("Can't go over 100 or under 0, please use a smaller number");
+    return promptAdjust();
+}
 
 
 
