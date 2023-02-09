@@ -12,6 +12,8 @@ body {
     display:flex;
     justify-content: center;
     padding: 10px;
+    max-width: 960px;
+    max-height: 960px;
 }
 
 /*Grid has to be fixed 960x960*/
@@ -29,7 +31,8 @@ body {
 /*Not using transitions here, will be eventlisteners*/
 
 .cell {
-    padding: 20px;
+    float: inline-end;
+    padding: 4.76px;
     transition: 0s background-color;
     transition-delay: 0.05s;
 }

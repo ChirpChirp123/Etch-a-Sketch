@@ -4,7 +4,7 @@
 const body = document.querySelector('body');
 
     const container = document.createElement('div');
-    container.style.cssText = "display:flex; flex-direction: column; background-color: grey; font-size: 3em; text-align: center;"
+    container.style.cssText = "display:flex; align-items: center; flex-direction: column; background-color: grey; font-size: 3em; text-align: center;"
     container.textContent = "Hide the Cat!";
 
     const gridButton = document.createElement('button');
@@ -13,7 +13,7 @@ const body = document.querySelector('body');
     gridButton.addEventListener('click', () => {
         //We want the numbers to be changed with a variable.
         //"16" is just a testing value.
-        let x = 16;
+        let x = 64;
         for(let i = 0; i <= (x); i++){ 
         createDiv(x, x);
         }
@@ -47,7 +47,6 @@ body.appendChild(promptButton);
 body.appendChild(clearButton);
 body.appendChild(container);    
 container.appendChild(gridContainer);
-
 
 
 
@@ -114,7 +113,6 @@ function error(){
     alert ("Can't go over 100 or under 0, please use a smaller number");
     return promptAdjust();
 }
-
 
 
 
