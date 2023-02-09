@@ -13,8 +13,9 @@ const body = document.querySelector('body');
     gridButton.addEventListener('click', () => {
         //We want the numbers to be changed with a variable.
         //"16" is just a testing value.
-        for(let i = 0; i <= 16; i++){ 
-        createDiv(16, 16);
+        let x = 16;
+        for(let i = 0; i <= (x); i++){ 
+        createDiv(x, x);
         }
     }, {
         once:true
@@ -27,10 +28,10 @@ const body = document.querySelector('body');
         promptAdjust();
     })
 
-    const clearGrid = document.createElement('button');
-    clearGrid.textContent = "Clear";
-    clearGrid.style.cssText = "font-size: 48px";
-    clearGrid.addEventListener('click', () =>{
+    const clearButton = document.createElement('button');
+    clearButton.textContent = "Clear";
+    clearButton.style.cssText = "font-size: 48px";
+    clearButton.addEventListener('click', () =>{
         clear();
     })
 
@@ -43,10 +44,9 @@ const body = document.querySelector('body');
 
 body.appendChild(gridButton);
 body.appendChild(promptButton);
-body.appendChild(clearGrid);
+body.appendChild(clearButton);
 body.appendChild(container);    
 container.appendChild(gridContainer);
-gridContainer.appendChild(drawingGrid);
 
 
 
@@ -56,8 +56,7 @@ gridContainer.appendChild(drawingGrid);
 
 
 
-
-
+//Notes: Ignore the grid having "defunct" rows on generation, focus on removing/appending.
 
 
 //For creating a grid without >16 lines of code.
@@ -66,9 +65,13 @@ function createDiv(gridLength, gridWidth) {
     let x = gridLength;
     let y = gridWidth;
 
+//Currently "row" is a local variable, if we would have to change it
+//then we'd have to use another function within "createDiv"
+
     for (let i = 0; i <= x; i++){    //Length
         var row = document.createElement('div');
         row.className = 'row';                       //(.className) = Needed for CSS
+        
         for (let j = 0; j <= y; j++){   //Width
             var cell = document.createElement('div');
             cell.className = 'cell';
@@ -76,7 +79,7 @@ function createDiv(gridLength, gridWidth) {
         }
     }
     drawingGrid.appendChild(row);
-
+    gridContainer.appendChild(drawingGrid);
     //Careful of Hierachy, if above (appendchild) then one row is missing.
     
     let gridCells = document.querySelectorAll('.cell')
@@ -84,7 +87,6 @@ function createDiv(gridLength, gridWidth) {
         cell.style.cssText = "background-color: blue;"
     }));
 }
-
 //"Clearing" out the cells by selecting all cells created
 //and changing its background color back to its default.
 
@@ -94,11 +96,13 @@ function clear(){
 }
 
 function promptAdjust(){
-    let gridVolume = prompt("How many squares per side?", "");
+    let gridVolume = prompt("How many squares per side?", );
     if (gridVolume > 100) {
         return error();
     } else if ((gridVolume <= 100) && (gridVolume > 0)){
+        for (let i = 0; i <= gridVolume; i++){
         createDiv(gridVolume, gridVolume);
+        }
     } else if (gridVolume < 0){
         return error();  
     } else {
@@ -110,6 +114,13 @@ function error(){
     alert ("Can't go over 100 or under 0, please use a smaller number");
     return promptAdjust();
 }
+
+
+
+
+
+
+
 
 
 
