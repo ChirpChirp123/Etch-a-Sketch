@@ -14,9 +14,7 @@ const body = document.querySelector('body');
         //We want the numbers to be changed with a variable.
         //"16" is just a testing value.
         let x = 100;
-        for(let i = 0; i <= (x); i++){ 
         createDiv(x, x);
-        }
     }, {
         once:true
     });
@@ -25,7 +23,7 @@ const body = document.querySelector('body');
     promptButton.style.cssText = "font-size: 48px;"
     promptButton.textContent = "Adjust";
     promptButton.addEventListener('click', () => {
-        promptAdjust();
+        adjustGrid();
     })
 
     const clearButton = document.createElement('button');
@@ -75,8 +73,8 @@ function createDiv(gridLength, gridWidth) {
             cell.className = 'cell';
             row.appendChild(cell);
         }
+        drawingGrid.appendChild(row);
     }
-    drawingGrid.appendChild(row);
     //Careful of Hierachy, if above (appendchild) then one row is missing.
     
     let gridCells = document.querySelectorAll('.cell')
@@ -94,14 +92,13 @@ function clear(){
     clear.forEach(cell => cell.style.cssText = "background-color: navajowhite;");
 }
 
-function promptAdjust(){
-    let gridVolume = prompt("How many squares per side?", );
+function adjustGrid(){
+    let gridVolume = 20;
+
     if (gridVolume > 100) {
         return error();
     } else if ((gridVolume <= 100) && (gridVolume > 0)){
-        for (let i = 0; i <= gridVolume; i++){
         createGrid(gridVolume, gridVolume);
-        }
     } else if (gridVolume < 0){
         return error();  
     } else {
@@ -109,9 +106,10 @@ function promptAdjust(){
     }
 }
 
+
 function error(){
     alert ("Can't go over 100 or under 0, please use a smaller number");
-    return promptAdjust();
+    return adjustGrid();
 }
 
 //We have to try and keep it all in one function.
