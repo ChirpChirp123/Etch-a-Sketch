@@ -24,10 +24,6 @@ body {
     justify-content: center;
 }
 
-.row {
-    background-color: navajowhite;
-}
-
 /*Not going to use column/row gaps for drawing.*/
 /*Not using transitions here, will be eventlisteners*/
 
@@ -36,9 +32,13 @@ body {
     padding: 4.76px;
     transition: 0s background-color;
     transition-delay: 0.05s;
+    background-color: navajowhite;
 }
 
 .cell:hover {   /*Testing*/   
     background-color: blue;
 }
 
+button{
+    font-size: 48px;
+}

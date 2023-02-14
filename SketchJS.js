@@ -1,5 +1,6 @@
 //Focus on making a single 16x16 grid first before anything.
-
+//Currently, our problem is trying to figure out how we can
+//change locally appended rows/cells.
 
 const body = document.querySelector('body');
 
@@ -9,26 +10,32 @@ const body = document.querySelector('body');
 
     const gridButton = document.createElement('button');
     gridButton.textContent = "beeboo";
-    gridButton.style.cssText = "font-size: 48px;"
     gridButton.addEventListener('click', () => {
         //We want the numbers to be changed with a variable.
         //"16" is just a testing value.
-        let x = 100;
-        createDiv(x, x);
+        let x = 20;
+        createGrid(x,x);
     }, {
         once:true
     });
 
     const promptButton = document.createElement('button');
-    promptButton.style.cssText = "font-size: 48px;"
     promptButton.textContent = "Adjust";
     promptButton.addEventListener('click', () => {
         adjustGrid();
     })
 
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener('click', () => {
+
+        while (drawingGrid.firstChild){
+        drawingGrid.firstChild.remove();                    //WORKS. Telling the drawingGrid to remove nodes (children);
+        }
+    })
+
     const clearButton = document.createElement('button');
     clearButton.textContent = "Clear";
-    clearButton.style.cssText = "font-size: 48px";
     clearButton.addEventListener('click', () =>{
         clear();
     })
@@ -42,6 +49,7 @@ const body = document.querySelector('body');
 
 body.appendChild(gridButton);
 body.appendChild(promptButton);
+body.appendChild(deleteButton);
 body.appendChild(clearButton);
 body.appendChild(container);    
 container.appendChild(gridContainer);
@@ -77,10 +85,11 @@ function createDiv(gridLength, gridWidth) {
     }
     //Careful of Hierachy, if above (appendchild) then one row is missing.
     
-    let gridCells = document.querySelectorAll('.cell')
-    gridCells.forEach(cell => cell.addEventListener('mouseover', () =>{
+    let colorCell = document.querySelectorAll('.cell')
+    colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
         cell.style.cssText = "background-color: blue;"
     }));
+
 }
 
 
@@ -93,11 +102,12 @@ function clear(){
 }
 
 function adjustGrid(){
-    let gridVolume = 20;
+    let gridVolume = parseInt(prompt("How many squares on each side?",""));
 
     if (gridVolume > 100) {
         return error();
     } else if ((gridVolume <= 100) && (gridVolume > 0)){
+        deleteGrid();
         createGrid(gridVolume, gridVolume);
     } else if (gridVolume < 0){
         return error();  
@@ -106,11 +116,18 @@ function adjustGrid(){
     }
 }
 
-
 function error(){
     alert ("Can't go over 100 or under 0, please use a smaller number");
     return adjustGrid();
 }
+
+function deleteGrid() {
+    while(drawingGrid.firstChild){
+        drawingGrid.firstChild.remove();
+    }
+}
+
+
 
 //We have to try and keep it all in one function.
 //Try doing a conditional statement that can have the grid remove rows
@@ -121,91 +138,96 @@ function createGrid(gridLength, gridWidth) {
     let y = gridWidth;
 
 //Creating//
-if ((x != gridVolume) || (y != gridVolume)){
     for (let i = 0; i <= x; i++){    //Length
-        var row = document.createElement('div');
-        row.className = 'row';                       //(.className) = Needed for CSS
-
+        row = document.createElement('div');
+        row.className = 'row';
         for (let j = 0; j <= y; j++){   //Width
-            var cell = document.createElement('div');
+            cell = document.createElement('div');
             cell.className = 'cell';
             row.appendChild(cell);
         }
+        drawingGrid.appendChild(row); 
     }
-    drawingGrid.appendChild(row);
-    //Careful of Hierachy, if above (appendchild) then one row is missing.
+    //Careful of Hierachy, can lead to missing row.
     
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
         cell.style.cssText = "background-color: blue;"
     }));
+}
 
 
-//Deleting -> Creating//
-} else {
-    for (let iDel = 0; iDel<= 100; iDel++){     //100* to completely clear all rows+cells from grid.
-        drawingGrid.removeChild(row);
 
-        for (let jDel = 0; jDel <= 100; jDel++){
-            row.removeChild(cell);
-        }
-    }
 
-    for (let iAdd = 0; iAdd <= x; iAdd++){
-        var row = document.createElement('div');
 
-        for(let jAdd = 0; jAdd <= y; jAdd++){
-            var cell = document.createElement('div');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//for(let i = 0; i <= z; i++){
+
+function gridTest(gridVolume, gridVolume, a) {
+    let row = document.createElement('div');
+    row.className = 'row';
+    let cell = document.createElement('div');
+    cell.className = 'cell';
+
+    let x = gridVolume;
+    let y = gridVolume;
+
+    if(a = 0){
+        for(let i = 0; i <= x; i++){
+        drawingGrid.appendChild(row);
+            for(let j = 0; j <= y; i++){
             row.appendChild(cell);
+            }
         }
     }
-    drawingGrid.appendChild(row);
+    
+    else if (a = 1){
+        for(let i = 0; i <= x; i++){
+        drawingGrid.removeChild(row);
+            for(let j = 0; j <= y; i++){
+            row.removeChild(cell);
+            }
+        }
+    } else {
+        return console.log("error");
+    }
 
-    let colorCell = document.querySelectorAll('.cell');
+    let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
         cell.style.cssText = "background-color: blue;"
-    }))
-
+    }));
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const bigButton = document.createElement('button');
-bigButton.textContent = "Increase"
-bigButton.addEventListener('click', () =>{
-
-})
-
-const smallButton = document.createElement('button');
-smallButton.textContent = "Decrease"
-smallButton.addEventListener('click', () =>{
-    
-})
-
-function gridSize(change){
-    if (change === "Smaller"){
-
-    } else if (change === "Bigger"){
-
-    } else {
-        return;
-    }
-}
+//}
