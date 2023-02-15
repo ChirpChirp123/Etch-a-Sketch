@@ -2,6 +2,12 @@
 //Currently, our problem is trying to figure out how we can
 //change locally appended rows/cells.
 
+
+//For loading the grid via JavaScript without button prompt.
+window.addEventListener('load', () =>{
+    createGrid(16,16);
+})
+
 const body = document.querySelector('body');
 
     const container = document.createElement('div');
@@ -56,47 +62,10 @@ container.appendChild(gridContainer);
 gridContainer.appendChild(drawingGrid);
 
 
-
-
-
-
-
-
-//Notes: Ignore the grid having "defunct" rows on generation, focus on removing/appending.
-//For creating a grid without >16 lines of code.
-
-function createDiv(gridLength, gridWidth) {
-    let x = gridLength;
-    let y = gridWidth;
-
-//Currently "row" is a local variable, if we would have to change it
-//then we'd have to use another function within "createDiv"
-
-    for (let i = 0; i <= x; i++){    //Length
-        var row = document.createElement('div');
-        row.className = 'row';                       //(.className) = Needed for CSS
-        
-        for (let j = 0; j <= y; j++){   //Width
-            var cell = document.createElement('div');
-            cell.className = 'cell';
-            row.appendChild(cell);
-        }
-        drawingGrid.appendChild(row);
-    }
-    //Careful of Hierachy, if above (appendchild) then one row is missing.
-    
-    let colorCell = document.querySelectorAll('.cell')
-    colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        cell.style.cssText = "background-color: blue;"
-    }));
-
-}
-
-
 //"Clearing" out the cells by selecting all cells created
 //and changing its background color back to its default.
 
-function clear(){
+function clear(){       //"Erasing" the grids
     let clear = document.querySelectorAll('.cell');
     clear.forEach(cell => cell.style.cssText = "background-color: navajowhite;");
 }
@@ -140,94 +109,16 @@ function createGrid(gridLength, gridWidth) {
 //Creating//
     for (let i = 0; i <= x; i++){    //Length
         row = document.createElement('div');
-        row.className = 'row';
+        row.className = 'row';                      //*className*, needed for CSS styling
         for (let j = 0; j <= y; j++){   //Width
             cell = document.createElement('div');
             cell.className = 'cell';
             row.appendChild(cell);
         }
-        drawingGrid.appendChild(row); 
+        drawingGrid.appendChild(row);  //Appending one after each round of loop.
     }
-    //Careful of Hierachy, can lead to missing row.
-    
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
         cell.style.cssText = "background-color: blue;"
     }));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//for(let i = 0; i <= z; i++){
-
-function gridTest(gridVolume, gridVolume, a) {
-    let row = document.createElement('div');
-    row.className = 'row';
-    let cell = document.createElement('div');
-    cell.className = 'cell';
-
-    let x = gridVolume;
-    let y = gridVolume;
-
-    if(a = 0){
-        for(let i = 0; i <= x; i++){
-        drawingGrid.appendChild(row);
-            for(let j = 0; j <= y; i++){
-            row.appendChild(cell);
-            }
-        }
-    }
-    
-    else if (a = 1){
-        for(let i = 0; i <= x; i++){
-        drawingGrid.removeChild(row);
-            for(let j = 0; j <= y; i++){
-            row.removeChild(cell);
-            }
-        }
-    } else {
-        return console.log("error");
-    }
-
-    let colorCell = document.querySelectorAll('.cell')
-    colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        cell.style.cssText = "background-color: blue;"
-    }));
-}
-//}

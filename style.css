@@ -12,9 +12,6 @@ body {
     display:flex;
     justify-content: center;
     padding: 10px;
-    max-width: 960px;
-    max-height: 960px;
-    box-sizing: border-box;
 }
 
 /*Grid has to be fixed 960x960*/
@@ -22,6 +19,12 @@ body {
 .drawingGrid {
     display:flex;
     justify-content: center;
+    box-sizing: border-box;
+    width: 960px;
+    height: 960px;
+    max-width: 960px;
+    max-height: 960px;
+    /*align-items: center;*/
 }
 
 /*Not going to use column/row gaps for drawing.*/
@@ -29,7 +32,8 @@ body {
 
 .cell {
     float: inline-end;
-    padding: 4.76px;
+    padding: 4.76px;   /*Try DOM manipulation instead, ((x) / (max width/height of the grid)) */
+    box-sizing: border-box;
     transition: 0s background-color;
     transition-delay: 0.05s;
     background-color: navajowhite;
