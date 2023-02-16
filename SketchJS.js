@@ -36,13 +36,23 @@ const body = document.querySelector('body');
         clear.forEach(cell => cell.style.backgroundColor = "navajowhite");
     })
 
+    const rgbButton = document.createElement('button');
+    rgbButton.textContent = "test";
+    rgbButton.addEventListener('click', () => {
+        let rgbCell = document.querySelectorAll('.cell');
+        rgbCell.forEach(cell => cell.addEventListener('mouseover', () =>{
+            cell.style.backgroundColor = `rgb(${randomColor},${randomColor},${randomColor})`
+        }));
+    })
+
     //Our drawing container
     const drawingGrid = document.createElement('div');
     drawingGrid.className = 'drawingGrid'
 
 body.appendChild(promptButton);
-body.appendChild(deleteButton);
 body.appendChild(clearButton);
+body.appendChild(deleteButton);
+body.appendChild(rgbButton);
 body.appendChild(container);    
 container.appendChild(drawingGrid);
 
@@ -76,6 +86,9 @@ function deleteGrid() {
     }
 }
 
+function randomColor(){
+    return Math.floor(Math.random() * 255);
+}
 
 //We have to try and keep it all in one function.
 //cellSize used to have our # of cells scale to the fixed size of the grid. 
@@ -99,6 +112,12 @@ function createGrid(x) {
     }
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        cell.style.backgroundColor = "blue";
+        //cell.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+        cell.style.backgroundColor = "Blue";
     }));
 }
+
+//We need a formula that involves random number generation for color.
+//Something like taking a generated number from 0-1 with Math.random
+//and then take that number and multiply it by max color value "255"
+//Then we round down to an integer with Math.floor.
