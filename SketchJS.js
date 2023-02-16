@@ -40,10 +40,11 @@ const body = document.querySelector('body');
         }
     })
 
-    const clearButton = document.createElement('button');
+    const clearButton = document.createElement('button');   //"Erasing" the grids
     clearButton.textContent = "Clear";
     clearButton.addEventListener('click', () =>{
-        clear();
+        let clear = document.querySelectorAll('.cell');
+        clear.forEach(cell => cell.style.backgroundColor = "navajowhite");
     })
 
     //Our drawing container
@@ -60,11 +61,6 @@ container.appendChild(drawingGrid);
 
 //"Clearing" out the cells by selecting all cells created
 //and changing its background color back to its default.
-
-function clear(){       //"Erasing" the grids
-    let clear = document.querySelectorAll('.cell');
-    clear.forEach(cell => cell.style.cssText = "background-color: navajowhite;");
-}
 
 function adjustGrid(){
     let gridVolume = parseInt(prompt("How many squares on each side?",""));
@@ -99,20 +95,23 @@ function deleteGrid() {
 
 function createGrid(x) {
 
-
 //Creating//
-    for (let i = 0; i <= x; i++){    //Length
+    for (let i = 1; i <= x; i++){    //Length
         row = document.createElement('div');
         row.className = 'row';                      //*className*, needed for CSS styling
-        for (let j = 0; j <= x; j++){   //Width
+        let cellSize = (960/x);
+        for (let j = 1; j <= x; j++){   //Width
             cell = document.createElement('div');
             cell.className = 'cell';
+            cell.style.width = cellSize + "px";
+            cell.style.height = cellSize + "px";
+            cell.style.backgroundColor = "NavajoWhite";
             row.appendChild(cell);
         }
         drawingGrid.appendChild(row);  //Appending one after each round of loop.
     }
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        cell.style.cssText = "background-color: blue;"
+        cell.style.backgroundColor = "blue";
     }));
 }
