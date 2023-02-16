@@ -29,9 +29,6 @@ body {
     /*align-items: center;*/
 }
 
-/*Not going to use column/row gaps for drawing.*/
-/*Not using transitions here, will be eventlisteners*/
-
 .cell {
     transition: 0s background-color;
     transition-delay: 0.05s;

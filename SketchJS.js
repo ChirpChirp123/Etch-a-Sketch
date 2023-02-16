@@ -14,17 +14,6 @@ const body = document.querySelector('body');
     container.className = 'container';
     container.textContent = "Hide the Cat!";
 
-    const gridButton = document.createElement('button');
-    gridButton.textContent = "beeboo";
-    gridButton.addEventListener('click', () => {
-        //We want the numbers to be changed with a variable.
-        //"16" is just a testing value.
-        let x = 20;
-        createGrid(x);
-    }, {
-        once:true
-    });
-
     const promptButton = document.createElement('button');
     promptButton.textContent = "Adjust";
     promptButton.addEventListener('click', () => {
@@ -51,7 +40,6 @@ const body = document.querySelector('body');
     const drawingGrid = document.createElement('div');
     drawingGrid.className = 'drawingGrid'
 
-body.appendChild(gridButton);
 body.appendChild(promptButton);
 body.appendChild(deleteButton);
 body.appendChild(clearButton);
@@ -90,8 +78,7 @@ function deleteGrid() {
 
 
 //We have to try and keep it all in one function.
-//Try doing a conditional statement that can have the grid remove rows
-//and have rows removing cells based on a value set in the for-loop.
+//cellSize used to have our # of cells scale to the fixed size of the grid. 
 
 function createGrid(x) {
 
