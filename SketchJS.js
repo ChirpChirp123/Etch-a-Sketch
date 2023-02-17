@@ -36,14 +36,10 @@ const body = document.querySelector('body');
         clear.forEach(cell => cell.style.backgroundColor = "navajowhite");
     })
 
-    const rgbButton = document.createElement('button');
-    rgbButton.textContent = "test";
-    rgbButton.addEventListener('click', () => {
-        let rgbCell = document.querySelectorAll('.cell');
-        rgbCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-            cell.style.backgroundColor = `rgb(${randomColor},${randomColor},${randomColor})`
-        }));
-    })
+    const rgbButton = document.createElement('input');
+    rgbButton.setAttribute("type", "color");
+    rgbButton.id = "rgbButton";
+    
 
     //Our drawing container
     const drawingGrid = document.createElement('div');
@@ -93,6 +89,10 @@ function randomColor(){
 //We have to try and keep it all in one function.
 //cellSize used to have our # of cells scale to the fixed size of the grid. 
 
+let rValue = 234;
+let bValue = 54;
+let gValue = 66;
+
 function createGrid(x) {
 
 //Creating//
@@ -112,8 +112,9 @@ function createGrid(x) {
     }
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        //cell.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
-        cell.style.backgroundColor = "Blue";
+        cell.style.backgroundColor = rgbButton.value;
+        //cell.style.backgroundColor = `rgb(${rValue}, ${bValue}, ${gValue})`;
+        //cell.style.backgroundColor = "Blue";
     }));
 }
 
