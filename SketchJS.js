@@ -5,7 +5,7 @@
 
 //For loading the grid via JavaScript without button prompt.
 window.addEventListener('load', () =>{
-    createGrid(16);
+    createGrid(20);
 })
 
 const body = document.querySelector('body');
@@ -18,15 +18,6 @@ const body = document.querySelector('body');
     promptButton.textContent = "Adjust";
     promptButton.addEventListener('click', () => {
         adjustGrid();
-    })
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener('click', () => {
-
-        while (drawingGrid.firstChild){
-        drawingGrid.firstChild.remove();                    //WORKS. Telling the drawingGrid to remove nodes (children);
-        }
     })
 
     const clearButton = document.createElement('button');   //"Erasing" the grids
@@ -47,7 +38,6 @@ const body = document.querySelector('body');
 
 body.appendChild(promptButton);
 body.appendChild(clearButton);
-body.appendChild(deleteButton);
 body.appendChild(rgbButton);
 body.appendChild(container);    
 container.appendChild(drawingGrid);
@@ -76,23 +66,21 @@ function error(){
     return adjustGrid();
 }
 
+//Saying that "while a 'firstChild' exists, remove it."
+//A loop that'll only last as long as there are still nodes appended.
 function deleteGrid() {
     while(drawingGrid.firstChild){
         drawingGrid.firstChild.remove();
     }
 }
 
+//Call this function 3 times in (style.backgroundColor = `rgb`) for random colors.
 function randomColor(){
     return Math.floor(Math.random() * 255);
 }
 
 //We have to try and keep it all in one function.
 //cellSize used to have our # of cells scale to the fixed size of the grid. 
-
-let rValue = 234;
-let bValue = 54;
-let gValue = 66;
-
 function createGrid(x) {
 
 //Creating//
@@ -112,13 +100,8 @@ function createGrid(x) {
     }
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        cell.style.backgroundColor = rgbButton.value;
-        //cell.style.backgroundColor = `rgb(${rValue}, ${bValue}, ${gValue})`;
-        //cell.style.backgroundColor = "Blue";
+        cell.style.backgroundColor = "blue";
+        cell.style.opacity = 0.1 + 0.1;
+        //cell.style.backgroundColor = rgbButton.value;
     }));
 }
-
-//We need a formula that involves random number generation for color.
-//Something like taking a generated number from 0-1 with Math.random
-//and then take that number and multiply it by max color value "255"
-//Then we round down to an integer with Math.floor.
