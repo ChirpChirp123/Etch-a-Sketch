@@ -75,8 +75,29 @@ function deleteGrid() {
 }
 
 //Call this function 3 times in (style.backgroundColor = `rgb`) for random colors.
+//For increments, try to keep variables global or values are stuck locally.
+//For calculations, we do "var X" = "var X + so-so" so our values can change.
+let percent = 0;
+
+function decrement(){
+    if (percent >= 255){
+        return;
+    } else {
+    return percent += 25.5;
+    }
+}
+
 function randomColor(){
-    return Math.floor(Math.random() * 255);
+    decrement();
+    let r = (Math.floor(Math.random() * 255));
+    let g = (Math.floor(Math.random() * 255));
+    let b = (Math.floor(Math.random() * 255));
+
+    r = r - percent;
+    g = g - percent;
+    b = b - percent;
+
+    return `rgb(${r},${g},${b})`;
 }
 
 //We have to try and keep it all in one function.
@@ -98,10 +119,32 @@ function createGrid(x) {
         }
         drawingGrid.appendChild(row);  //Appending one after each round of loop.
     }
+    
+    //let cellOpacity = 0;
+
     let colorCell = document.querySelectorAll('.cell')
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
-        cell.style.backgroundColor = "blue";
-        cell.style.opacity = 0.1 + 0.1;
-        //cell.style.backgroundColor = rgbButton.value;
+        //cell.style.backgroundColor = "blue";
+        //cell.style.opacity = `${cellOpacity += 0.1}`;
+        cell.style.backgroundColor = randomColor();
+        //cell.style.backgroundColor = `rgb(${(randomColor())}, ${(randomColor())}, ${(randomColor())})`;
+        //cell.style.backgroundColor = (rgbButton.value);
     }));
 }
+
+
+//1. To convert a color hue to black, we'd need to understand their values.
+//2. We know that black has the value of "0, 0, 0".
+//3. We'll need a formula that can gradually decrease our chosen hue by "10%" down to 0's.
+//4. Eventually a cell would turn black after 10 hovers.
+
+//We could try using rgb(x, x, x) and apply a variable into the style values to calculate.
+//For this, we'll need a new variable that stores the "10%" value and can be used for equation.
+//This variable could be let percent = (255/10);
+
+//With the "percent" variable, we could set up another function within "randomColor()"
+//This would be above the random value generator for hierachy reasons.
+//This function would return "percent += 25.5" to incrementally decrease the hue values.
+//So after 10 passes, any random integers produced would be subtracted by "255"
+//This would return nothing above "0" and any color will become black after 10 passes.
+//Have a conditional statement to prevent high numbers if above "255"
