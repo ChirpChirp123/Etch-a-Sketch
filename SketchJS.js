@@ -5,7 +5,7 @@
 
 //For loading the grid via JavaScript without button prompt.
 window.addEventListener('load', () =>{
-    createGrid(20);
+    createGrid(13);
 })
 
 const body = document.querySelector('body');
@@ -79,23 +79,16 @@ function deleteGrid() {
 //For calculations, we do "var X" = "var X + so-so" so our values can change.
 let percent = 0;
 
-function decrement(){
-    if (percent >= 255){
-        return;
-    } else {
-    return percent += 25.5;
-    }
-}
-
 function randomColor(){
-    decrement();
     let r = (Math.floor(Math.random() * 255));
     let g = (Math.floor(Math.random() * 255));
     let b = (Math.floor(Math.random() * 255));
 
-    r = r - percent;
-    g = g - percent;
-    b = b - percent;
+    r = (r - ((r/100) * percent));
+    g = (g - ((g/100) * percent));
+    b = (b - ((b/100) * percent));
+
+    percent += 10;
 
     return `rgb(${r},${g},${b})`;
 }
