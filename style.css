@@ -8,6 +8,18 @@ body {
     background-size: cover;
 }
 
+.buttonSelect{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 0.5em;
+    gap: 0.5em; 
+}
+
+.rgbButton{
+    width: 4.5em;
+    height: 4.5em;
+}
 .container{
     display:flex;
     align-items: center; 
@@ -40,4 +52,10 @@ body {
 
 button{
     font-size: 48px;
+}
+
+button:hover{
+    background-color: rgb(57, 52, 52);
+    color: aliceblue;
+    transition: 150ms;
 }

@@ -1,7 +1,3 @@
-//Focus on making a single 16x16 grid first before anything.
-//Currently, our problem is trying to figure out how we can
-//change locally appended rows/cells.
-
 
 //For loading the grid via JavaScript without button prompt.
 window.addEventListener('load', () =>{
@@ -14,13 +10,16 @@ const body = document.querySelector('body');
     container.className = 'container';
     container.textContent = "Hide the Cat!";
 
+    const buttonSelect = document.createElement('div');
+    buttonSelect.className = "buttonSelect";
+
     const promptButton = document.createElement('button');
     promptButton.textContent = "Adjust";
     promptButton.addEventListener('click', () => {
         adjustGrid();
     })
 
-    const clearButton = document.createElement('button');   //"Erasing" the grids
+    const clearButton = document.createElement('button');   //"Erasing" the grids via recolor.
     clearButton.textContent = "Clear";
     clearButton.addEventListener('click', () =>{
         let clear = document.querySelectorAll('.cell');
@@ -28,6 +27,7 @@ const body = document.querySelector('body');
     })
 
     const rgbButton = document.createElement('input');
+    rgbButton.className = "rgbButton";
     rgbButton.setAttribute("type", "color");
     rgbButton.id = "rgbButton";
     
@@ -36,15 +36,14 @@ const body = document.querySelector('body');
     const drawingGrid = document.createElement('div');
     drawingGrid.className = 'drawingGrid'
 
-body.appendChild(promptButton);
-body.appendChild(clearButton);
-body.appendChild(rgbButton);
-body.appendChild(container);    
+
+body.appendChild(container);
+container.appendChild(buttonSelect);
 container.appendChild(drawingGrid);
+buttonSelect.appendChild(promptButton);
+buttonSelect.appendChild(clearButton);
+buttonSelect.appendChild(rgbButton);   
 
-
-//"Clearing" out the cells by selecting all cells created
-//and changing its background color back to its default.
 
 function adjustGrid(){
     let gridVolume = parseInt(prompt("How many squares on each side?",""));
@@ -74,7 +73,6 @@ function deleteGrid() {
     }
 }
 
-//Call this function 3 times in (style.backgroundColor = `rgb`) for random colors.
 //For increments, try to keep variables global or values are stuck locally.
 //For calculations, we do "var X" = "var X + so-so" so our values can change.
 let percent = 0;
@@ -119,25 +117,8 @@ function createGrid(x) {
     colorCell.forEach(cell => cell.addEventListener('mouseover', () =>{
         //cell.style.backgroundColor = "blue";
         //cell.style.opacity = `${cellOpacity += 0.1}`;
-        cell.style.backgroundColor = randomColor();
-        //cell.style.backgroundColor = `rgb(${(randomColor())}, ${(randomColor())}, ${(randomColor())})`;
-        //cell.style.backgroundColor = (rgbButton.value);
+        //cell.style.backgroundColor = randomColor();
+        cell.style.backgroundColor = (rgbButton.value);
     }));
 }
 
-
-//1. To convert a color hue to black, we'd need to understand their values.
-//2. We know that black has the value of "0, 0, 0".
-//3. We'll need a formula that can gradually decrease our chosen hue by "10%" down to 0's.
-//4. Eventually a cell would turn black after 10 hovers.
-
-//We could try using rgb(x, x, x) and apply a variable into the style values to calculate.
-//For this, we'll need a new variable that stores the "10%" value and can be used for equation.
-//This variable could be let percent = (255/10);
-
-//With the "percent" variable, we could set up another function within "randomColor()"
-//This would be above the random value generator for hierachy reasons.
-//This function would return "percent += 25.5" to incrementally decrease the hue values.
-//So after 10 passes, any random integers produced would be subtracted by "255"
-//This would return nothing above "0" and any color will become black after 10 passes.
-//Have a conditional statement to prevent high numbers if above "255"
