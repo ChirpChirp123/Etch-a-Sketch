@@ -26,6 +26,16 @@ const body = document.querySelector('body');
         clear.forEach(cell => cell.style.backgroundColor = "navajowhite");
     })
 
+    const eraserButton = document.createElement('button');
+    eraserButton.textContent = "Eraser";
+    eraserButton.addEventListener('click', () => {
+        //Need fix
+        let eraser = document.querySelectorAll('.cell');
+        eraser.forEach(cell => cell.addEventListener("mouseover", () => {
+            cell.style.backgroundColor = "najavowhite";
+        }));
+    });
+
     const rgbButton = document.createElement('input');
     rgbButton.className = "rgbButton";
     rgbButton.setAttribute("type", "color");
@@ -42,11 +52,12 @@ container.appendChild(buttonSelect);
 container.appendChild(drawingGrid);
 buttonSelect.appendChild(promptButton);
 buttonSelect.appendChild(clearButton);
+buttonSelect.appendChild(eraserButton);
 buttonSelect.appendChild(rgbButton);   
 
 
 function adjustGrid(){
-    let gridVolume = parseInt(prompt("How many squares on each side?",""));
+    let gridVolume = parseInt(prompt("How many squares on each side? Will delete progress!",""));
 
     if (gridVolume > 100) {
         return error();
