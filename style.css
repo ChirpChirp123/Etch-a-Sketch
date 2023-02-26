@@ -12,7 +12,7 @@ body {
     display:flex;
     flex-direction: row;
     align-items: center;
-    padding-top: 0.5em;
+    padding-top: 1em;
     padding-bottom: 0.5em;
     gap: 0.5em; 
 }
@@ -26,7 +26,8 @@ body {
     align-items: center; 
     flex-direction: column; 
     background-color: grey; 
-    font-size: 3em; 
+    font-size: 3em;
+    font-weight: 500; 
     text-align: center; 
     padding: 30px;
 }
@@ -59,9 +60,20 @@ button:hover{
     background-color: lightskyblue;
     color: black;
     transition: 200ms;
+    cursor: pointer;
 }
 
 button:active{
+    background-color: rgb(46, 46, 43);
+    color: aliceblue;
+}
+
+button:focus-within{
+    background-color: rgb(46, 46, 43);
+    color: aliceblue;
+}
+
+.eraserButtonOn { 
     background-color: rgb(46, 46, 43);
     color: aliceblue;
 }

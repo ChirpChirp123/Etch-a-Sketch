@@ -28,8 +28,25 @@ const body = document.querySelector('body');
 
     const eraserButton = document.createElement('button');
     eraserButton.textContent = "Eraser";
+    eraserButton.className = "eraserButtonOff";
     eraserButton.addEventListener('click', () => {
         //Need fix
+        eraserButton.style.display = "none";
+        eraserButton2.style.display = "block";
+        let eraser = document.querySelectorAll('.cell');
+        eraser.forEach(cell => cell.addEventListener("mouseover", () => {
+            cell.style.backgroundColor = "najavowhite";
+        }));
+    });
+
+    const eraserButton2 = document.createElement('button');
+    eraserButton2.textContent = "Eraser";
+    eraserButton2.className = "eraserButtonOn";
+    eraserButton2.style.display = "none";
+    eraserButton2.addEventListener('click', () => {
+        //Need fix
+        eraserButton2.style.display = "none";
+        eraserButton.style.display = "block";
         let eraser = document.querySelectorAll('.cell');
         eraser.forEach(cell => cell.addEventListener("mouseover", () => {
             cell.style.backgroundColor = "najavowhite";
@@ -53,6 +70,7 @@ container.appendChild(drawingGrid);
 buttonSelect.appendChild(promptButton);
 buttonSelect.appendChild(clearButton);
 buttonSelect.appendChild(eraserButton);
+buttonSelect.appendChild(eraserButton2);
 buttonSelect.appendChild(rgbButton);   
 
 
