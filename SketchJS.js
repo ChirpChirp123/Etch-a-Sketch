@@ -21,43 +21,44 @@ const body = document.querySelector('body');
 
     const clearButton = document.createElement('button');   //"Erasing" the grids via recolor.
     clearButton.textContent = "Clear";
-    clearButton.addEventListener('click', () =>{
+    clearButton.addEventListener('click', () => {
         let clear = document.querySelectorAll('.cell');
         clear.forEach(cell => cell.style.backgroundColor = "navajowhite");
     })
-
-    const eraserButton = document.createElement('button');
-    eraserButton.textContent = "Eraser";
-    eraserButton.className = "eraserButtonOff";
-    eraserButton.addEventListener('click', () => {
-        //Need fix
-        eraserButton.style.display = "none";
-        eraserButton2.style.display = "block";
-        let eraser = document.querySelectorAll('.cell');
-        eraser.forEach(cell => cell.addEventListener("mouseover", () => {
-            cell.style.backgroundColor = "najavowhite";
-        }));
-    });
-
-    const eraserButton2 = document.createElement('button');
-    eraserButton2.textContent = "Eraser";
-    eraserButton2.className = "eraserButtonOn";
-    eraserButton2.style.display = "none";
-    eraserButton2.addEventListener('click', () => {
-        //Need fix
-        eraserButton2.style.display = "none";
-        eraserButton.style.display = "block";
-        let eraser = document.querySelectorAll('.cell');
-        eraser.forEach(cell => cell.addEventListener("mouseover", () => {
-            cell.style.backgroundColor = "najavowhite";
-        }));
-    });
 
     const rgbButton = document.createElement('input');
     rgbButton.className = "rgbButton";
     rgbButton.setAttribute("type", "color");
     rgbButton.id = "rgbButton";
-    
+
+    const eraserButton = document.createElement('button');
+    eraserButton.textContent = "Eraser";
+    eraserButton.className = "eraserButtonOff";
+    eraserButton.addEventListener('click', () => {
+        eraserButton.style.display = "none";
+        eraserButton2.style.display = "block";
+            //Need fix
+            let eraseOn = document.querySelectorAll('.cell');
+            eraseOn.forEach(cell => cell.addEventListener("mouseover", () => {
+                cell.style.backgroundColor = "najavowhite";
+            }));
+    });
+
+        const eraserButton2 = document.createElement('button');
+        eraserButton2.textContent = "Eraser";
+        eraserButton2.className = "eraserButtonOn";
+        eraserButton2.style.display = "none";
+        eraserButton2.addEventListener('click', () => {
+            eraserButton2.style.display = "none";
+            eraserButton.style.display = "block";
+                //Need fix
+                eraserButton2.style.display = "none";
+                eraserButton.style.display = "block";
+                let eraseOff = document.querySelectorAll('.cell');
+                eraseOff.forEach(cell => cell.addEventListener("mouseover", () => {
+                    cell.style.backgroundColor = (rgbButton.value);
+                }));
+        });
 
     //Our drawing container
     const drawingGrid = document.createElement('div');
@@ -139,7 +140,6 @@ function createGrid(x) {
         }
         drawingGrid.appendChild(row);  //Appending one after each round of loop.
     }
-    
     //let cellOpacity = 0;
 
     let colorCell = document.querySelectorAll('.cell')
