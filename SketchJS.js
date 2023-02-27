@@ -26,11 +26,6 @@ const body = document.querySelector('body');
         clear.forEach(cell => cell.style.backgroundColor = "navajowhite");
     })
 
-    const rgbButton = document.createElement('input');
-    rgbButton.className = "rgbButton";
-    rgbButton.setAttribute("type", "color");
-    rgbButton.id = "rgbButton";
-
     const eraserButton = document.createElement('button');
     eraserButton.textContent = "Eraser";
     eraserButton.className = "eraserButtonOff";
@@ -40,7 +35,7 @@ const body = document.querySelector('body');
             //Need fix
             let eraseOn = document.querySelectorAll('.cell');
             eraseOn.forEach(cell => cell.addEventListener("mouseover", () => {
-                cell.style.backgroundColor = "najavowhite";
+                cell.style.backgroundColor = "navajowhite";
             }));
     });
 
@@ -51,14 +46,20 @@ const body = document.querySelector('body');
         eraserButton2.addEventListener('click', () => {
             eraserButton2.style.display = "none";
             eraserButton.style.display = "block";
-                //Need fix
                 eraserButton2.style.display = "none";
                 eraserButton.style.display = "block";
-                let eraseOff = document.querySelectorAll('.cell');
-                eraseOff.forEach(cell => cell.addEventListener("mouseover", () => {
-                    cell.style.backgroundColor = (rgbButton.value);
+                    //Need fix
+                    let eraseOff = document.querySelectorAll('.cell');
+                    eraseOff.forEach(cell => cell.addEventListener("mouseover", () => {
+                        cell.style.backgroundColor = (rgbButton.value);
                 }));
         });
+
+    const rgbButton = document.createElement('input');
+    rgbButton.className = "rgbButton";
+    rgbButton.setAttribute("type", "color");
+    rgbButton.id = "rgbButton";
+    
 
     //Our drawing container
     const drawingGrid = document.createElement('div');
