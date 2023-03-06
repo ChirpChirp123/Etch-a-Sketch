@@ -18,10 +18,6 @@ body {
     gap: 0.5em; 
 }
 
-.rgbButton{
-    width: 4.5em;
-    height: 4.5em;
-}
 .container{
     display:flex;
     align-items: center; 
@@ -33,6 +29,7 @@ body {
     padding: 30px;
 }
 /*Grid has to be fixed 960x960*/
+/*Grid*/
 
 .drawingGrid {
     margin: 1em;
@@ -49,6 +46,13 @@ body {
 
 .cell:hover {   /*Testing*/   
     background-color: blue;
+}
+
+/*Buttons*/
+
+.rgbButton{
+    width: 4.5em;
+    height: 4.5em;
 }
 
 button{

@@ -42,17 +42,15 @@ const body = document.querySelector('body');
         const eraserButton2 = document.createElement('button');
         eraserButton2.textContent = "Eraser";
         eraserButton2.className = "eraserButtonOn";
-        eraserButton2.style.display = "none";
+        eraserButton2.style.display = "none";   //When page loads.
         eraserButton2.addEventListener('click', () => {
             eraserButton2.style.display = "none";
             eraserButton.style.display = "block";
-                eraserButton2.style.display = "none";
-                eraserButton.style.display = "block";
-                    //Need fix
-                    let eraseOff = document.querySelectorAll('.cell');
-                    eraseOff.forEach(cell => cell.addEventListener("mouseover", () => {
-                        cell.style.backgroundColor = (rgbButton.value);
-                }));
+                //Need fix
+                let eraseOff = document.querySelectorAll('.cell');
+                eraseOff.forEach(cell => cell.addEventListener("mouseover", () => {
+                    cell.style.backgroundColor = (rgbButton.value);
+            }));
         });
 
     const rgbButton = document.createElement('input');
