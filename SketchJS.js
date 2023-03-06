@@ -8,7 +8,7 @@ const body = document.querySelector('body');
 
     const container = document.createElement('div');
     container.className = 'container';
-    container.textContent = "Hide the Cat!";
+    container.textContent = "Etch a Sketch!";
 
     const buttonSelect = document.createElement('div');
     buttonSelect.className = "buttonSelect";
@@ -29,10 +29,10 @@ const body = document.querySelector('body');
     const eraserButton = document.createElement('button');
     eraserButton.textContent = "Eraser";
     eraserButton.className = "eraserButtonOff";
+
     eraserButton.addEventListener('click', () => {
         eraserButton.style.display = "none";
         eraserButton2.style.display = "block";
-            //Need fix
             let eraseOn = document.querySelectorAll('.cell');
             eraseOn.forEach(cell => cell.addEventListener("mouseover", () => {
                 cell.style.backgroundColor = "navajowhite";
@@ -43,10 +43,10 @@ const body = document.querySelector('body');
         eraserButton2.textContent = "Eraser";
         eraserButton2.className = "eraserButtonOn";
         eraserButton2.style.display = "none";   //When page loads.
+
         eraserButton2.addEventListener('click', () => {
             eraserButton2.style.display = "none";
             eraserButton.style.display = "block";
-                //Need fix
                 let eraseOff = document.querySelectorAll('.cell');
                 eraseOff.forEach(cell => cell.addEventListener("mouseover", () => {
                     cell.style.backgroundColor = (rgbButton.value);
@@ -57,11 +57,39 @@ const body = document.querySelector('body');
     rgbButton.className = "rgbButton";
     rgbButton.setAttribute("type", "color");
     rgbButton.id = "rgbButton";
+
+    const rainbowButton = document.createElement('button');
+    rainbowButton.textContent = "Rainbow";
+    rainbowButton.className = "rainbowOff";
+    rainbowButton.addEventListener('click', () => {
+        rainbowButton.style.display = "none";
+        rainbowButton2.style.display = "block";
+
+        let randomRgbOn = document.querySelectorAll('.cell');
+        randomRgbOn.forEach(cell => cell.addEventListener("mouseover", () => {
+            cell.style.backgroundColor = (randomColor());
+        }));
+    });
     
+        const rainbowButton2 = document.createElement('button');
+        rainbowButton2.textContent = "Rainbow";
+        rainbowButton2.className = "rainbowOn";
+        rainbowButton2.style.display = "none";
+        rainbowButton2.addEventListener('click', () => {
+            rainbowButton.style.display = "block";
+            rainbowButton2.style.display = "none";
+
+            let randomRgbOff = document.querySelectorAll('.cell');
+            randomRgbOff.forEach(cell => cell.addEventListener("mouseover", () => {
+                cell.style.backgroundColor = (rgbButton.value);
+            }));
+
+        });
+        
 
     //Our drawing container
     const drawingGrid = document.createElement('div');
-    drawingGrid.className = 'drawingGrid'
+    drawingGrid.className = 'drawingGrid';
 
 
 body.appendChild(container);
@@ -69,6 +97,8 @@ container.appendChild(buttonSelect);
 container.appendChild(drawingGrid);
 buttonSelect.appendChild(promptButton);
 buttonSelect.appendChild(clearButton);
+buttonSelect.appendChild(rainbowButton);
+buttonSelect.appendChild(rainbowButton2);
 buttonSelect.appendChild(eraserButton);
 buttonSelect.appendChild(eraserButton2);
 buttonSelect.appendChild(rgbButton);   
@@ -114,8 +144,8 @@ function randomColor(){
     r = (r - ((r/100) * percent));
     g = (g - ((g/100) * percent));
     b = (b - ((b/100) * percent));
-
-    percent += 10;
+    
+    //percent += 10;
 
     return `rgb(${r},${g},${b})`;
 }
